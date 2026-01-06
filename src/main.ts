@@ -134,29 +134,9 @@ class GenericObject {
   }
 }
 
-let player = new Player();
-let platforms = [
-  new Platform({ x: -1, y: 452, image: createImage(platformBg) }),
-  new Platform({
-    x: createImage(platformBg).width - 3, y: 452, image: createImage(platformBg)
-  }),
-  new Platform({
-    x: createImage(platformBg).width * 2 + 100, y: 452, image: createImage(platformBg)
-  }),
-  new Platform({
-    x: createImage(platformBg).width * 3 + 200, y: 452, image: createImage(platformBg)
-  }),
-  new Platform({
-    x: createImage(platformBg).width * 3 + 490, y: 452 - createImage(platformSmallBg).height, image: createImage(platformSmallBg)
-  }),
-  new Platform({
-    x: createImage(platformBg).width * 4 + 600, y: 452, image: createImage(platformBg)
-  }),
-]
-let objects = [
-  new GenericObject({ x: -1, y: -1, image: createImage(backgroundBg) }),
-  new GenericObject({ x: -1, y: -1, image: createImage(hills) }),
-]
+let player: Player;
+let platforms: Platform[] = []
+let objects: GenericObject[] = []
 let scrollOffset = 0
 let lastKey = ""
 
@@ -169,16 +149,16 @@ function init() {
       x: createImage(platformBg).width - 3, y: 452, image: createImage(platformBg)
     }),
     new Platform({
-      x: createImage(platformBg).width * 2 + 100, y: 452, image: createImage(platformBg)
+      x: createImage(platformBg).width * 2 + 200, y: 452, image: createImage(platformBg)
     }),
     new Platform({
-      x: createImage(platformBg).width * 3 + 200, y: 452, image: createImage(platformBg)
+      x: createImage(platformBg).width * 3 + 450, y: 452, image: createImage(platformBg)
     }),
     new Platform({
-      x: createImage(platformBg).width * 3 + 490, y: 452 - createImage(platformSmallBg).height, image: createImage(platformSmallBg)
+      x: createImage(platformBg).width * 3 + 740, y: 452 - createImage(platformSmallBg).height, image: createImage(platformSmallBg)
     }),
     new Platform({
-      x: createImage(platformBg).width * 4 + 600, y: 452, image: createImage(platformBg)
+      x: createImage(platformBg).width * 4 + 900, y: 452, image: createImage(platformBg)
     }),
   ]
   objects = [
@@ -186,7 +166,6 @@ function init() {
     new GenericObject({ x: -1, y: -1, image: createImage(hills) }),
   ]
   scrollOffset = 0
-  lastKey = ""
 }
 
 function animate() {
@@ -240,7 +219,7 @@ function animate() {
       player.velocity.y = 0
     }
   })
-  if (scrollOffset >= createImage(platformBg).width * 4 + 110) {
+  if (scrollOffset >= createImage(platformBg).width * 4 + 380) {
     console.log("You Win 🥂🎉")
   }
 
@@ -279,10 +258,6 @@ function animate() {
   }
 
 
-
-
-
-
   if (player.position.y >= canvas.height) {
     console.log("You Loose 😭")
     init()
@@ -293,7 +268,6 @@ init()
 animate()
 
 addEventListener("keydown", (event) => {
-  console.log(event.key, "key")
   if (event.key.toLowerCase() === 'w' || event.key === 'ArrowUp' || event.key === ' ') {
     player.velocity.y -= 12
   }
